@@ -28,8 +28,9 @@ class ForgetPassViewState extends State<ForgetPassView> {
           onTap: () {
             Navigator.pop(context);
           },
+          child: Image.asset('assets/images/Back.png'),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 128, 26, 26),
         elevation: 0.0,
       ),
       body: Padding(
