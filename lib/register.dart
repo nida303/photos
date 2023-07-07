@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'requestController.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -8,8 +11,9 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  final requestController = Get.put(RequestController());
   TextEditingController tNama = TextEditingController();
-  TextEditingController tUser = TextEditingController();
+  TextEditingController tEmail = TextEditingController();
   TextEditingController tPass = TextEditingController();
 
   bool isHide = true;
@@ -46,34 +50,34 @@ class _RegisterViewState extends State<RegisterView> {
               SizedBox(
                 height: 40.0,
               ),
-              TextField(
-                minLines: 1,
-                controller: tNama,
-                decoration: InputDecoration(
-                  hintText: "Nama",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 3,
-                      color: Colors.black,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 3,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                keyboardType: TextInputType.text,
-              ),
+              // TextField(
+              //   minLines: 1,
+              //   controller: tNama,
+              //   decoration: InputDecoration(
+              //     hintText: "Nama",
+              //     enabledBorder: OutlineInputBorder(
+              //       borderSide: BorderSide(
+              //         width: 3,
+              //         color: Colors.black,
+              //       ),
+              //     ),
+              //     focusedBorder: OutlineInputBorder(
+              //       borderSide: BorderSide(
+              //         width: 3,
+              //         color: Colors.black,
+              //       ),
+              //     ),
+              //   ),
+              //   keyboardType: TextInputType.text,
+              // ),
               SizedBox(
                 height: 30.0,
               ),
               TextField(
                 minLines: 1,
-                controller: tUser,
+                controller: tEmail,
                 decoration: InputDecoration(
-                  hintText: "Username",
+                  hintText: "Email",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       width: 3,
@@ -143,8 +147,10 @@ class _RegisterViewState extends State<RegisterView> {
                 height: 30.0,
               ),
               TextButton(
-                onPressed: () {
-                  print('Next ${tUser.text} dan ${tPass.text}');
+                onPressed: () async {
+                  print('Next ${tEmail.text} dan ${tPass.text}');
+                  await requestController.createRegister(
+                      context, tEmail.text, tPass.text);
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(

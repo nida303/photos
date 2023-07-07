@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'homepage.dart';
 import 'forgetpass.dart';
+import 'requestController.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final requestController = Get.put(RequestController());
   TextEditingController tUser = TextEditingController();
   TextEditingController tPass = TextEditingController();
 
@@ -123,13 +126,15 @@ class _LoginViewState extends State<LoginView> {
               ),
               TextButton(
                 onPressed: () async {
-                  print('Login ${tUser.text} dan ${tPass.text}');
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePageView(),
-                    ),
-                  );
+                  print('Next ${tUser.text} dan ${tPass.text}');
+                  await requestController.createLogin(
+                      context, tUser.text, tPass.text);
+                  // await Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const HomePageView(),
+                  //   ),
+                  // );
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(

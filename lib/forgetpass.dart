@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project2/requestController.dart';
 
 import 'login.dart';
+import 'color.dart';
 
 class ForgetPassView extends StatefulWidget {
   const ForgetPassView({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class ForgetPassView extends StatefulWidget {
 }
 
 class ForgetPassViewState extends State<ForgetPassView> {
+  final requestController = Get.put(RequestController());
   TextEditingController tUser = TextEditingController();
   TextEditingController tPass = TextEditingController();
   int _counter = 0;
@@ -79,12 +83,7 @@ class ForgetPassViewState extends State<ForgetPassView> {
             TextButton(
               onPressed: () async {
                 print('Login ${tUser.text} dan ${tPass.text}');
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgetPassView(),
-                  ),
-                );
+                await requestController.createUser(context, 'nida', '123');
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
